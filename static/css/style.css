@@ -1,0 +1,27 @@
+body {
+    background-color: gray;
+}
+
+.container {
+    color: white;
+}
+
+.custom-container {
+      max-width: 80%;
+      margin: 0 auto; /* Center the container horizontally */
+    }
+
+
+span.due_date {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 0 7px;
+    background: #eee;
+    border: 1px solid transparent;
+    color: #666;
+    white-space: nowrap;
+    display: inline-block;
+    border-radius: 12px;
+    vertical-align: middle;
+    cursor: pointer;
+}
