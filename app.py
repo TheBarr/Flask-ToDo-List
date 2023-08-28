@@ -16,22 +16,49 @@ class ToDoForm(FlaskForm):
     submit = SubmitField("Add Task")
 
 
+class EditForm(FlaskForm):
+    task = StringField('Task', validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
+    submit = SubmitField("Edit")
+
+
 task_list = []
+id = 0
 
 
 @app.route('/', methods=["GET", "POST"])
 def task_manager():
     form = ToDoForm()
     if form.validate_on_submit():
-        task_list.append((form.task.data, form.date.data))
+        task_list.append({"todo": form.task.data, "date": form.date.data, "done": False})
         return redirect(url_for('task_manager'))
     return render_template("index.html", form=form, task_list=task_list)
 
 
-@app.route('/task-delete/<int:task_index>', methods=["GET", "POST"])
+@app.route('/delete-task/<int:task_index>', methods=["GET", "POST"])
 def delete_task(task_index):
     del task_list[task_index]
     return redirect(url_for('task_manager'))
+
+
+@app.route('/edit-task/<int:task_index>', methods=["GET", "POST"])
+def edit_task(task_index):
+    form = EditForm(task=task_list[task_index]['todo'], date=task_list[task_index]['date'])
+    if form.validate_on_submit():
+        task_list[task_index]['todo'] = form.task.data
+        task_list[task_index]['date'] = form.date.data
+        return redirect(url_for('task_manager'))
+    return render_template("edit.html", form=form)
+
+
+@app.route("/checked/<int:task_index>", methods=["GET", "POST"])
+def check_task(task_index):
+    if not task_list[task_index]['done']:
+        task_list[task_index]['done'] = True
+        return redirect(url_for('task_manager'))
+    else:
+        task_list[task_index]['done'] = False
+        return redirect(url_for('task_manager'))
 
 
 if __name__ == '__main__':

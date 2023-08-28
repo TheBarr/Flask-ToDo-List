@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+    <div class="container py-3">
+        <div class="col text-center">
+            <h1 class="align-center">Edit Task</h1>
+        </div>
+        {{ render_form(form, button_style="dark") }}
+        <hr class="hr"/>
+    </div>
+{% endblock %}

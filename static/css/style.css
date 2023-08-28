@@ -7,9 +7,9 @@ body {
 }
 
 .custom-container {
-      max-width: 80%;
-      margin: 0 auto; /* Center the container horizontally */
-    }
+    max-width: 70%;
+    margin: 0 auto; /* Center the container horizontally */
+}
 
 
 span.due_date {
@@ -23,5 +23,4 @@ span.due_date {
     display: inline-block;
     border-radius: 12px;
     vertical-align: middle;
-    cursor: pointer;
 }
